@@ -73,11 +73,9 @@ export default function Calculator() {
           {...props}
         />
         <span className="help" id={`${inputId}-help`}>{copy.help}</span>
-        {fieldErrors.length > 0 && (
-          <span className="error" id={`${inputId}-err`}>
-            {fieldErrors.map((e) => ERRORS[e]).join(' ')}
-          </span>
-        )}
+        <span className="error" id={`${inputId}-err`}>
+          {fieldErrors.map((e) => ERRORS[e]).join(' ')}
+        </span>
       </div>
     );
   };

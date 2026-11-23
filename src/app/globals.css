@@ -119,8 +119,11 @@ legend { padding: 0; margin-bottom: 8px; font-weight: 500; color: var(--ink-navy
 .option-label { font-weight: 500; color: var(--ink-navy); }
 .option-help { font-size: 14px; line-height: 21px; color: var(--muted-grey); }
 
-.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-gap); }
-.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+/* Each field spans four subgrid rows (label, input, help, error) so inputs line up across a row
+   even when one label wraps to two lines. */
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); column-gap: var(--space-gap); row-gap: var(--space-gap); }
+.field { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 6px; min-width: 0; align-content: start; }
+.field label { align-self: end; }
 .field label { font-size: 15px; font-weight: 500; color: var(--ink-navy); }
 .field input {
   height: 52px; padding: 0 16px; font: inherit; font-size: 16px; color: var(--ink-navy); width: 100%;
