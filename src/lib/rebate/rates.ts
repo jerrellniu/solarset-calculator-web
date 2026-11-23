@@ -26,6 +26,9 @@ export const RATES = {
   /** GST rate for GST registered businesses installing for the business. */
   gstRate: 0.1,
 
+  /** Display helpers used by the copy. */
+  display: { maxDecimals: 2, kwPerMw: 1000, percentScale: 100, usableDecimals: 1 },
+
   /** Absorbs floating point error before rounding certificates down. */
   floorTolerance: 1e-9,
 

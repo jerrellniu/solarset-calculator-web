@@ -1,0 +1,14 @@
+# Solar Set Rebate Calculator
+
+> Rebate calculator for solar and battery certificates in Queensland and Northern NSW, with the assumptions shown.
+
+The calculator estimates federal small-scale technology certificates (STCs) for solar systems and for batteries under the Cheaper Home Batteries Program. It uses the Clean Energy Regulator's postcode zones, the install date and the system size, and shows the certificate price and the date it was checked. It runs in the browser and stores nothing.
+
+Solar Set designs, installs and maintains solar and battery systems on the Gold Coast, in Brisbane and in Northern NSW.
+
+## Links
+
+- [Rebate calculator](https://rebate-calculator.solarset.com.au/)
+- [Solar and battery rebates guide](https://solarset.com.au/solar-battery-rebates/)
+- [Solar and battery packages](https://solarset.com.au/solar-battery-packages/)
+- [Request a quote](https://solarset.com.au/request-quote/)
