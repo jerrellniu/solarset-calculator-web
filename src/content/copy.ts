@@ -23,7 +23,8 @@ const midYears = word(RATES.solar.midScaleDeemingYears);
 export const SITE = {
   url: 'https://rebate-calculator.solarset.com.au',
   main: 'https://solarset.com.au',
-  requestQuote: 'https://solarset.com.au/request-quote/',
+  /** /request-quote/ is broken (unrendered YITH shortcode), so quote buttons go to the Sophiie form on /contact-us/. */
+  requestQuote: 'https://solarset.com.au/contact-us/',
   serviceAreas: 'https://solarset.com.au/service-areas/',
   rebatesHub: 'https://solarset.com.au/solar-battery-rebates/',
   packages: 'https://solarset.com.au/solar-battery-packages/',

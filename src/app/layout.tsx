@@ -11,8 +11,6 @@ export const metadata: Metadata = {
   description: PAGE.description,
   alternates: { canonical: '/' },
   openGraph: { title: PAGE.title, description: PAGE.description, url: '/', siteName: 'Solar Set', locale: 'en_AU', type: 'website' },
-  // Gate C: noindex until Jerrell approves the build. Remove this line at go-live.
-  robots: { index: false, follow: false },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
