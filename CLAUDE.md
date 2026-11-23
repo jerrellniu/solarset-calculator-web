@@ -8,7 +8,7 @@ Solar Set rebate calculator. Next.js (App Router, TypeScript) on Vercel at rebat
 - Every rate lives in `src/lib/rebate/rates.ts`. No numbers anywhere else.
 - Logic follows the Rebate Calculator Logic Spec in Notion. Tests must pass the Greenbank cross-check cases.
 - No personal data is stored. No database.
-- Live and indexable since 23 November 2026 (Gate D). Quote buttons point to /contact-us/ because /request-quote/ is broken.
+- Live and indexable since 23 November 2026 (Gate D). Quote buttons link straight to the Sophiie quote form. /request-quote/ 301s to the same form.
 
 ## Gates
 A copy and logic locked, B design approved, C build approved, D cutover approved. Jerrell signs each off.
