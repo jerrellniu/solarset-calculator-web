@@ -80,7 +80,7 @@ export default function Calculator() {
     );
   };
 
-  const option = (value: 'household' | 'business', copy: { label: string; help: string }) => (
+  const option = (value: 'household' | 'business', copy: { label: string }) => (
     <label className={`option${input.customer === value ? ' is-on' : ''}`}>
       <input
         type="radio"
@@ -89,10 +89,7 @@ export default function Calculator() {
         checked={input.customer === value}
         onChange={() => set('customer')(value)}
       />
-      <span className="option-text">
-        <span className="option-label">{copy.label}</span>
-        <span className="option-help">{copy.help}</span>
-      </span>
+      <span className="option-label">{copy.label}</span>
     </label>
   );
 

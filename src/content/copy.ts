@@ -55,8 +55,8 @@ export const PAGE = {
 export const FORM = {
   customerLegend: 'Who is the system for?',
   customerHelp: 'Choose household or business. GST is included for businesses.',
-  household: { label: 'Household', help: 'A home you live in or own.' },
-  business: { label: 'Business registered for GST', help: 'A business that will use the system for the business.' },
+  household: { label: 'Household' },
+  business: { label: 'Business registered for GST' },
   postcode: { label: 'Install address postcode', help: 'We use your postcode to find your solar zone.' },
   installDate: { label: 'Install date', help: 'The date your installer expects to test and commission the system.' },
   solar: {

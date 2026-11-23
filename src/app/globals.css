@@ -110,11 +110,11 @@ fieldset { border: 0; margin: 0; padding: 0; display: flex; flex-direction: colu
 legend { padding: 0; margin-bottom: 8px; font-weight: 500; color: var(--ink-navy); }
 .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
 .option {
-  display: flex; gap: 12px; align-items: flex-start; min-height: 44px; padding: 16px 18px; margin: 1px;
+  display: flex; gap: 12px; align-items: center; min-height: 44px; padding: 16px 18px; margin: 1px;
   border-radius: var(--radius-card); background: var(--panel-grey); border: 1px solid var(--muted-grey); cursor: pointer;
 }
 .option.is-on { margin: 0; background: var(--white); border: 2px solid var(--ink-navy); box-shadow: 0 0 0 3px var(--brand-cyan); }
-.option input { flex: 0 0 auto; margin: 3px 0 0; width: 20px; height: 20px; accent-color: var(--ink-navy); cursor: pointer; }
+.option input { flex: 0 0 auto; margin: 0; width: 20px; height: 20px; accent-color: var(--ink-navy); cursor: pointer; }
 .option-text { display: flex; flex-direction: column; gap: 2px; }
 .option-label { font-weight: 500; color: var(--ink-navy); }
 .option-help { font-size: 14px; line-height: 21px; color: var(--muted-grey); }
