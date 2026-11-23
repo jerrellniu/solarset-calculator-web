@@ -10,10 +10,9 @@ describe('estimate', () => {
     expect(r).toMatchObject({ ok: true, tier: 'core', total: 4588, gst: 0 });
   });
 
-  it('adds GST and a notice for a business', () => {
+  it('adds GST for a business without a separate notice', () => {
     const r = estimate({ ...base, customer: 'business' });
-    expect(r).toMatchObject({ ok: true, gst: 458.8 });
-    if (r.ok) expect(r.notices).toContain('gst');
+    expect(r).toMatchObject({ ok: true, gst: 458.8, notices: [] });
   });
 
   it('reports field errors', () => {

@@ -31,8 +31,7 @@ export type Notice =
   | 'overMidScaleCap'
   | 'batteryTooSmall'
   | 'batteryTooLarge'
-  | 'batteryCapped'
-  | 'gst';
+  | 'batteryCapped';
 
 export type Estimate = {
   ok: true;
@@ -111,7 +110,6 @@ export function estimate(input: RawInput): Estimate | EstimateErrors {
 
   const value = (solar?.value ?? 0) + (battery?.value ?? 0);
   const gst = (solar?.gst ?? 0) + (battery?.gst ?? 0);
-  if (input.customer === 'business' && (solar || battery)) notices.push('gst');
 
   return {
     ok: true,

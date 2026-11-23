@@ -183,7 +183,7 @@ export default function Calculator() {
               <span>{RESULT.total}</span>
               <span>{r ? money(r.total) : dash}</span>
             </div>
-            <p className="est-caption">{RESULT.caption}</p>
+            <p className="est-caption">{r?.customer === 'business' ? RESULT.captionBusiness : RESULT.caption}</p>
           </section>
         )}
 

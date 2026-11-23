@@ -68,7 +68,7 @@ export const FORM = {
     help: 'Use the nominal capacity on the battery datasheet. We reduce it to usable capacity. Leave blank if you are only adding solar.',
   },
   submit: 'Calculate my rebate',
-  reset: 'Start again',
+  reset: 'Clear form',
 };
 
 export const ERRORS: Record<FieldError, string> = {
@@ -86,7 +86,8 @@ export const RESULT = {
   heading: 'Your estimated rebate',
   totalBefore: 'Your rebate is worth about',
   totalAfter: 'This comes off your quote as a discount.',
-  caption: `The figure uses ${price} a certificate, checked ${asAt}. Your agent's price may be different, so treat it as an estimate.`,
+  caption: 'This is an estimate only.',
+  captionBusiness: 'This is an estimate only. GST is included.',
   solarCerts: 'Solar certificates',
   solarValue: 'Solar value',
   batteryCerts: 'Battery certificates',
@@ -153,10 +154,6 @@ export const NOTICES: Record<Notice, { heading: string; copy: string }> = {
   batteryCapped: {
     heading: `Only the first ${claimable} counts`,
     copy: `The program pays on the first ${claimable} of usable capacity, so we have capped your result there.`,
-  },
-  gst: {
-    heading: 'GST is included',
-    copy: `Your business is registered for GST and uses the system for the business, so the certificates are taxable and we have added ${percent(RATES.gstRate)}. Ask your accountant to confirm how this applies to you.`,
   },
 };
 
