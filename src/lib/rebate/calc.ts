@@ -121,3 +121,34 @@ export function calcBatteryUsable(input: BatteryBase & { usableKwh: number; nomi
 export function calcBattery(input: BatteryBase & { nominalKwh: number }): BatteryResult {
   return calcBatteryUsable({ ...input, usableKwh: input.nominalKwh * RATES.battery.usableShare });
 }
+
+const inRanges = (postcode: number, ranges: ReadonlyArray<readonly [number, number]>) =>
+  ranges.some(([from, to]) => postcode >= from && postcode <= to);
+
+export type VppResult = {
+  certificates: number;
+  value: number;
+  capacityKwh: number;
+  capped: boolean;
+  networkLossFactor: number;
+};
+
+/** NSW VPP incentive (PDRS BESS2). Returns null when the postcode is not in NSW or the battery is outside the limits. */
+export function calcNswVpp(input: { usableKwh: number; postcode: number; certificatePrice?: number }): VppResult | null {
+  const v = RATES.nswVpp;
+  if (!inRanges(input.postcode, v.nswPostcodes)) return null;
+  if (!(input.usableKwh > v.minUsableKwhExclusive) || input.usableKwh > v.maxUsableKwh) return null;
+  const capacityKwh = Math.min(input.usableKwh, v.capKwh);
+  const networkLossFactor = inRanges(input.postcode, v.ausgridPostcodes)
+    ? v.networkLossFactor.ausgrid
+    : v.networkLossFactor.default;
+  const reduction = capacityKwh * v.coefficientKwPerKwh * v.firmnessFactor * v.durationHours * v.lifetimeYears;
+  const certificates = floorCerts(reduction * networkLossFactor * v.certificatesPerKw);
+  return {
+    certificates,
+    value: certificates * (input.certificatePrice ?? v.certificatePrice),
+    capacityKwh,
+    capped: input.usableKwh > v.capKwh,
+    networkLossFactor,
+  };
+}

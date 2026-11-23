@@ -157,6 +157,14 @@ fieldset > .help { font-size: 14px; line-height: 21px; margin-top: 4px; }
 .est-row-total span:last-child { font-size: 22px; }
 .est-caption { margin-top: 6px; font-size: 13px; line-height: 20px; color: var(--light-grey); }
 
+/* NSW VPP card */
+.vpp { display: flex; flex-direction: column; gap: 12px; border: 2px solid var(--brand-cyan); }
+.vpp-head { display: flex; gap: 14px; align-items: center; }
+.vpp-eyebrow { font-size: 13px; line-height: 18px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--stat-navy); }
+.vpp-amount { font-size: 40px; line-height: 1.2; font-weight: 300; color: var(--stat-navy); }
+.vpp p:not(.vpp-eyebrow):not(.vpp-amount):not(.muted):not(.vpp-working) { font-size: 15px; line-height: 24px; }
+.vpp-working { font-size: 13px; line-height: 20px; color: var(--muted-grey); padding-top: 10px; border-top: 1px solid var(--light-grey); }
+
 /* Working, notices, tier */
 .working, .notices { display: flex; flex-direction: column; gap: 18px; }
 .working-row, .notice { display: flex; gap: 16px; align-items: flex-start; }

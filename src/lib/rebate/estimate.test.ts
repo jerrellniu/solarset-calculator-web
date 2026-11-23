@@ -44,6 +44,20 @@ describe('estimate', () => {
   });
 });
 
+describe('NSW VPP in the estimate', () => {
+  it('shows the VPP incentive for a Northern NSW battery without adding it to the total', () => {
+    const r = estimate({ ...base, postcode: '2486', solarKw: '', batteryKwh: '13' });
+    if (!r.ok) throw new Error('expected ok');
+    expect(r.vpp).toMatchObject({ certificates: 259 });
+    expect(r.total).toBe(r.battery!.value);
+  });
+
+  it('shows no VPP incentive in Queensland', () => {
+    const r = estimate(base);
+    expect(r).toMatchObject({ ok: true, vpp: null });
+  });
+});
+
 describe('copy', () => {
   it('has no unfilled placeholders', () => {
     const text = JSON.stringify(copy);

@@ -83,6 +83,45 @@ export const RATES = {
   },
 
   /**
+   * NSW virtual power plant incentive: Peak Demand Reduction Scheme activity BESS2, "Onboard a
+   * Behind the Meter Battery Energy Storage System with a Demand Response Aggregator", per the
+   * PDRS (Amendment No. 2) Rule 2026, commenced 1 July 2026.
+   * Certificates = min(usable, capKwh) x coefficient x firmness x durationHours x lifetimeYears
+   *                x network loss factor x certificatesPerKw, rounded down.
+   * Cross-check: 16.6 kWh usable in the Essential Energy area gives 368 certificates (Greenbank).
+   */
+  nswVpp: {
+    coefficientKwPerKwh: 0.0734,
+    firmnessFactor: 0.8,
+    durationHours: 6,
+    lifetimeYears: 6,
+    capKwh: 28,
+    /** Usable capacity must be greater than this. */
+    minUsableKwhExclusive: 2,
+    /** Usable capacity must be no more than this. */
+    maxUsableKwh: 50,
+    certificatesPerKw: 10,
+    /** Minimum VPP contract, in months. */
+    contractMonths: 12,
+    /** Dollars per certificate. DEFAULT: Greenbank's price, checked 10 September 2026. */
+    certificatePrice: 2,
+    /** Network loss factors (Rule Table A3). Essential and Endeavour are 1.05, Ausgrid 1.04. */
+    networkLossFactor: { default: 1.05, ausgrid: 1.04 },
+    /** NSW postcodes. The ACT ranges (2600 to 2618, 2900 to 2920) are excluded. */
+    nswPostcodes: [
+      [1000, 2599],
+      [2619, 2899],
+      [2921, 2999],
+    ] as Array<[number, number]>,
+    /** APPROXIMATE Ausgrid area: Sydney east, north and inner west, Central Coast, Hunter. Error is at most 1%. */
+    ausgridPostcodes: [
+      [2000, 2139],
+      [2190, 2239],
+      [2250, 2339],
+    ] as Array<[number, number]>,
+  },
+
+  /**
    * Service area. DEFAULT bands pending Holly (open item 7 in the Logic Spec). The Sunshine
    * Coast is not core. Ranges are inclusive postcodes. Anything not listed is outside.
    */

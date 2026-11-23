@@ -104,3 +104,25 @@ describe('Lookups', () => {
     expect(serviceTierForPostcode(2486)).toBe('core');
   });
 });
+
+import { calcNswVpp } from './calc';
+
+describe('NSW VPP incentive (PDRS BESS2)', () => {
+  it('16.6 kWh usable in the Essential Energy area gives 368 certificates, matching Greenbank', () => {
+    expect(calcNswVpp({ usableKwh: 16.6, postcode: 2486 })).toMatchObject({ certificates: 368, value: 736, networkLossFactor: 1.05 });
+  });
+
+  it('uses the Ausgrid loss factor in Sydney', () => {
+    expect(calcNswVpp({ usableKwh: 16.6, postcode: 2000 })).toMatchObject({ certificates: 364, networkLossFactor: 1.04 });
+  });
+
+  it('counts only the first 28 kWh', () => {
+    expect(calcNswVpp({ usableKwh: 40, postcode: 2486 })).toMatchObject({ capacityKwh: 28, capped: true, certificates: 621 });
+  });
+
+  it('is not available above 50 kWh usable, outside NSW or in the ACT', () => {
+    expect(calcNswVpp({ usableKwh: 51, postcode: 2486 })).toBeNull();
+    expect(calcNswVpp({ usableKwh: 16.6, postcode: 4220 })).toBeNull();
+    expect(calcNswVpp({ usableKwh: 16.6, postcode: 2600 })).toBeNull();
+  });
+});

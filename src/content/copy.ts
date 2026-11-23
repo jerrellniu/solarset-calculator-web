@@ -106,6 +106,21 @@ export const WORKING = {
     `Your ${p.nominalKwh}kWh battery has about ${p.usableKwh}kWh of usable capacity. The federal program pays on the first ${claimable} of usable capacity, and larger batteries earn less for each kWh above the first band. Your install date sets a factor of ${p.factor}, which steps down every six months until ${end}.`,
 };
 
+const vpp = RATES.nswVpp;
+
+/** NSW VPP card. NEW COPY, 23 November 2026, awaiting Jerrell's approval in the copy deck. */
+export const VPP = {
+  eyebrow: 'Extra NSW payment',
+  heading: 'Join a virtual power plant and earn more',
+  amount: (p: { value: string }) => `About ${p.value}`,
+  copy: (p: { certificates: number }) =>
+    `NSW pays a one-off incentive when you sign your battery up to a virtual power plant (VPP) for at least ${vpp.contractMonths} months. Your battery earns about ${p.certificates} peak reduction certificates, worth ${money(vpp.certificatePrice)} each.`,
+  timing:
+    'This is paid by your VPP provider after you join, so it is not part of the discount on your quote. Providers set their own terms and may keep part of the value.',
+  working: (p: { capacityKwh: string; nlf: string; capped: boolean }) =>
+    `We count ${p.capacityKwh}kWh of usable capacity${p.capped ? ` (the scheme counts up to ${vpp.capKwh}kWh)` : ''} at ${vpp.coefficientKwPerKwh}kW per kWh, a firmness factor of ${vpp.firmnessFactor}, ${word(vpp.durationHours)} peak hours and a ${word(vpp.lifetimeYears)} year life, with a network loss factor of ${p.nlf}.`,
+};
+
 export const TIERS: Record<ServiceTier, { heading: string; copy: string; button: string; href: string; primary: boolean }> = {
   core: {
     heading: 'We install in your area',
@@ -207,7 +222,7 @@ export const FAQS: Array<{ q: string; a: string }> = [
   },
   {
     q: 'Does this calculator include state incentives?',
-    a: 'No. It covers the federal solar and battery rebates only. Queensland has no state battery incentive at the moment, and we do not show New South Wales payments here.',
+    a: `It includes the New South Wales incentive for joining a virtual power plant, shown separately because your VPP provider pays it after you join. NSW counts up to ${vpp.capKwh}kWh of usable capacity for batteries up to ${vpp.maxUsableKwh}kWh. Queensland has no state battery incentive at the moment.`,
   },
   {
     q: 'Do you store my details?',

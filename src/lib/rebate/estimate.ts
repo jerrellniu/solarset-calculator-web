@@ -1,5 +1,7 @@
 import {
   calcBattery,
+  calcNswVpp,
+  type VppResult,
   calcSolar,
   serviceTierForPostcode,
   type BatteryResult,
@@ -41,6 +43,8 @@ export type Estimate = {
   nominalKwh: number | null;
   solar: Extract<SolarResult, { eligible: true }> | null;
   battery: Extract<BatteryResult, { eligible: true }> | null;
+  /** NSW VPP incentive. Paid by the VPP provider after joining, so it is not in value or total. */
+  vpp: VppResult | null;
   value: number;
   gst: number;
   total: number;
@@ -108,6 +112,9 @@ export function estimate(input: RawInput): Estimate | EstimateErrors {
     }
   }
 
+  const vpp =
+    nominalKwh !== null ? calcNswVpp({ usableKwh: nominalKwh * RATES.battery.usableShare, postcode }) : null;
+
   const value = (solar?.value ?? 0) + (battery?.value ?? 0);
   const gst = (solar?.gst ?? 0) + (battery?.gst ?? 0);
 
@@ -119,6 +126,7 @@ export function estimate(input: RawInput): Estimate | EstimateErrors {
     nominalKwh,
     solar,
     battery,
+    vpp,
     value,
     gst,
     total: value + gst,

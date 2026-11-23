@@ -1,11 +1,11 @@
 'use client';
 
 import { useId, useRef, useState, type FormEvent } from 'react';
-import { ERRORS, FORM, NOTICES, RESULT, TIERS, WORKING } from '@/content/copy';
+import { ERRORS, FORM, NOTICES, RESULT, TIERS, VPP, WORKING } from '@/content/copy';
 import { estimate, type Estimate, type FieldError, type RawInput } from '@/lib/rebate/estimate';
 import { RATES } from '@/lib/rebate/rates';
 import { money, num } from '@/lib/format';
-import { Arrow, Battery, Info, Pin, Sun } from './Icons';
+import { Arrow, Battery, Bolt, Info, Pin, Sun } from './Icons';
 
 const EMPTY: RawInput = { customer: 'household', postcode: '', installDate: '', solarKw: '', batteryKwh: '' };
 
@@ -181,6 +181,28 @@ export default function Calculator() {
               <span>{r ? money(r.total) : dash}</span>
             </div>
             <p className="est-caption">{r?.customer === 'business' ? RESULT.captionBusiness : RESULT.caption}</p>
+          </section>
+        )}
+
+        {r?.vpp && (
+          <section className="card vpp" aria-label={VPP.eyebrow}>
+            <div className="vpp-head">
+              <span className="chip chip-sm"><Bolt color="#1d2246" /></span>
+              <div>
+                <p className="vpp-eyebrow">{VPP.eyebrow}</p>
+                <h2 className="h3">{VPP.heading}</h2>
+              </div>
+            </div>
+            <p className="vpp-amount">{VPP.amount({ value: money(r.vpp.value) })}</p>
+            <p>{VPP.copy({ certificates: r.vpp.certificates })}</p>
+            <p className="muted">{VPP.timing}</p>
+            <p className="vpp-working">
+              {VPP.working({
+                capacityKwh: num(r.vpp.capacityKwh, RATES.display.usableDecimals),
+                nlf: num(r.vpp.networkLossFactor),
+                capped: r.vpp.capped,
+              })}
+            </p>
           </section>
         )}
 
