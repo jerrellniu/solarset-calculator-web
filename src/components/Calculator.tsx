@@ -176,10 +176,6 @@ export default function Calculator() {
                 <span>{money(r.gst)}</span>
               </div>
             )}
-            <div className="est-row est-row-total">
-              <span>{RESULT.total}</span>
-              <span>{r ? money(r.total) : dash}</span>
-            </div>
             <p className="est-caption">{r?.customer === 'business' ? RESULT.captionBusiness : RESULT.caption}</p>
           </section>
         )}

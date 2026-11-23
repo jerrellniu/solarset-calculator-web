@@ -93,7 +93,6 @@ export const RESULT = {
   batteryCerts: 'Battery certificates',
   batteryValue: 'Battery value',
   gst: `GST at ${percent(RATES.gstRate)}`,
-  total: 'Total',
 };
 
 export const WORKING = {
